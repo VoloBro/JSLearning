@@ -8,23 +8,39 @@
 </head>
 <body>
 <div class="buttons">
-    <button id="plus_btn">+</button>
-    <button id="minus_btn">-</button>
+    <button id="plus">+</button>
+    <button id="minus">-</button>
 </div>
 <div>
     <p>Value: <span id="value">0</span> </p>
 </div>
 </body>
 <script type="text/javascript">
-    var value = 0;
-    $("#plus_btn").click(function () {
-        value++;
-        $("#value").text(value);
+
+    var plusStream = $('#plus').asEventStream('click').map(1);
+
+    var minusStream = $('#minus').asEventStream('click').map(-1);
+
+    var counterStream = plusStream.merge(minusStream).scan(0, function (prev, curr) {
+        return prev + curr;
+    });
+
+    counterStream.onValue(function (value) {
+        console.log("Change value to: " + value);
     })
 
-    $("#minus_btn").on('click', function (e) {
-        value--;
-        $("#value").text(value);
-    })
+    counterStream.assign($('#value'), 'text');
+
+
+//    var value = 0;
+//    $("#plus").click(function () {
+//        value++;
+//        $("#value").text(value);
+//    })
+//
+//    $("#minus").on('click', function (e) {
+//        value--;
+//        $("#value").text(value);
+//    })
 </script>
 </html>
