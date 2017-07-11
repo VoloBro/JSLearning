@@ -4,17 +4,27 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.94/Bacon.js"></script>
 </head>
 <body>
 <div class="buttons">
-    <button class="plus_btn">+</button>
-    <button class="minus_btn">-</button>
+    <button id="plus_btn">+</button>
+    <button id="minus_btn">-</button>
 </div>
 <div>
-    <p>Value: <span class="value">0</span> </p>
+    <p>Value: <span id="value">0</span> </p>
 </div>
 </body>
 <script type="text/javascript">
+    var value = 0;
+    $("#plus_btn").click(function () {
+        value++;
+        $("#value").text(value);
+    })
 
+    $("#minus_btn").on('click', function (e) {
+        value--;
+        $("#value").text(value);
+    })
 </script>
 </html>

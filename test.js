@@ -14,5 +14,3 @@ function calcArea() {
 
     alert("The area height: " + height + "w: " + width + " a: " + area );
 }
-
-
